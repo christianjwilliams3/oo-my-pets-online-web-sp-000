@@ -17,25 +17,8 @@ class Owner
    def say_species
     "I am a #{species}."
   end
-
-   def self.all
-    @@all
-  end
-
-   def self.count
-    self.all.collect{|owner| owner.name}.count
-  end
-
-   def self.reset_all
-    @@all = []
-  end
-
-   def cats
-    Owner.reset_all
-    Cat.all
-  end
   
-  def buy_dog(name_of_dog)
+    def buy_dog(name_of_dog)
     @pets[:dogs] << Dog.new(name_of_dog)
   end
 
@@ -78,3 +61,21 @@ class Owner
     return "I have #{num_dogs} dog(s), and #{num_cats} cat(s)."
   end
  end
+
+   def self.all
+    @@all
+  end
+
+   def self.count
+    self.all.collect{|owner| owner.name}.count
+  end
+
+   def self.reset_all
+    @@all = []
+  end
+
+   def cats
+    Owner.reset_all
+    Cat.all
+  end
+  
