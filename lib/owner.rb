@@ -30,9 +30,8 @@ class Owner
     @@all = []
   end
 
-   def cats
-    Owner.reset_all
-    Cat.all
+ def pets
+    @@pets
   end
   
   def buy_cat(cat)
