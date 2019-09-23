@@ -54,12 +54,12 @@ class Owner
     end
   end
   
-  def sell_pets
-    @pets.collect do |species, instances|
-      instances.each do |pet|
-        pet.mood = "nervous"
+ def sell_pets
+    pets.each do |pet, arr|
+      arr.map do |pet|
+        pet.mood = 'nervous'
       end
-      instances.clear
+      arr.clear
     end
   end
 
