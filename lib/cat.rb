@@ -1,19 +1,40 @@
 class Cat
 
-    attr_accessor :mood, :owner
-    attr_reader :name
+  @@all = []
 
-     @@all = []
+   def initialize(name, owner)
+    @name = name
+    @owner = Owner.new(owner)
+    @@all << self
+  end
 
-     def initialize(name, owner)
-      @name = name
-      @mood = "nervous"
-      @@all << self
-      @owner = owner
-      @owner.pets[:cats] << self
+   def name
+    @name
+  end
+
+   def owner
+    @owner.name
+  end
+
+   def owner=(owner)
+    @owner = Owner.new(owner)
+  end
+
+
+   def mood=(mood)
+    @mood = mood
+  end
+
+   def mood
+    if @mood == nil
+      "nervous"
+    else
+      @mood
     end
+  end
 
-     def self.all
-      @@all
-    end
-  end 
+   def self.all
+    @@all.select{|cat| cat.name}
+  end
+
+ end
