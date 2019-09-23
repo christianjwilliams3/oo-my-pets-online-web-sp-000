@@ -55,13 +55,15 @@ class Owner
   end
   
   def sell_pets
-    @pets.collect do |species, instances|
-      instances.each do |pet|
-        pet.mood = "nervous"
+    pets.each do |pet, arr|
+      arr.map do |pet|
+        pet.mood = 'nervous'
       end
-      instances.clear
+      arr.clear
     end
   end
+
+end
 
   def list_pets
     num_dogs = @pets[:dogs].count
