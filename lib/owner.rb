@@ -34,5 +34,7 @@ class Owner
     Owner.reset_all
     Cat.all
   end
+  
+  
 
  end
