@@ -30,7 +30,7 @@ class Owner
     @@all = []
   end
 
- def pets
+  def pets
     @@pets
   end
   
