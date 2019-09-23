@@ -1,71 +1,65 @@
 class Owner
+  # code goes here
+  attr_reader :name, :species
+
   @@all = []
 
-   def initialize(name)
+  def initialize(name)
     @name = name
+    @species = "human"
     @@all << self
   end
 
-   def name
-    @name.dup.freeze
+  def say_species
+    "I am a #{self.species}."
   end
 
-   def species(specie = "human")
-    @species = specie
-  end
-
-   def say_species
-    "I am a #{species}."
-  end
-
-   def self.all
+  def self.all
     @@all
   end
 
-   def self.count
-    self.all.collect{|owner| owner.name}.count
+  def self.count
+    self.all.count
   end
 
-   def self.reset_all
-    @@all = []
+  def self.reset_all
+    self.all.clear
   end
 
-  def pets
-    @@all
-  end
-  
-  def buy_cat(cat)
-    @@all[:cats] << Cat.new(cat)
+  def cats
+    Cat.all.select{|cat| cat.owner == self}
   end
 
-  def buy_dog(dog)
-    @@all[:dogs] << Dog.new(dog)
+  def dogs
+    Dog.all.select{|dog| dog.owner == self}
   end
-  
+
+  def buy_cat(name)
+    Cat.new(name, self)
+  end
+
+  def buy_dog(name)
+    Dog.new(name, self)
+  end
+
   def walk_dogs
-    @@all[:dogs].each do |dog|
-      dog.mood = 'happy'
-    end
+    self.dogs.each { |dog| dog.mood = "happy" }
   end
-  
+
   def feed_cats
-    @@all[:cats].each do |cat|
-      cat.mood = 'happy'
-    end
+    self.cats.each { |cat| cat.mood = "happy" }
   end
-  
- def sell_pets
-    pets.each do |pet, arr|
-      arr.map do |pet|
-        pet.mood = 'nervous'
-      end
-      arr.clear
+
+  def sell_pets
+    pets = self.dogs + self.cats
+
+    pets.each do |pet|
+      pet.mood = "nervous"
+      pet.owner = nil
     end
   end
 
   def list_pets
-    num_dogs = @pets[:dogs].count
-    num_cats = @pets[:cats].count
-    return "I have #{num_dogs} dog(s), and #{num_cats} cat(s)."
+    "I have #{self.dogs.count} dog(s), and #{self.cats.count} cat(s)."
   end
- end
+end
